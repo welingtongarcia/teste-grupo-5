@@ -14,6 +14,23 @@ class TestCalculadora(unittest.TestCase):
         with self.assertRaises(ValueError):
             calcular_total(10, -2)
 
+    def test_desconto_dez_porcento(self):
+        self.assertEqual(calcular_total(50, 2, desconto=10), 90)
+
+    def test_desconto_zero(self):
+        self.assertEqual(calcular_total(50, 2, desconto=0), 100)
+
+    def test_desconto_cem_porcento(self):
+        self.assertEqual(calcular_total(50, 2, desconto=100), 0)
+
+    def test_desconto_acima_do_limite(self):
+        with self.assertRaises(ValueError):
+            calcular_total(50, 2, desconto=120)
+
+    def test_desconto_abaixo_do_limite(self):
+        with self.assertRaises(ValueError):
+            calcular_total(50, 2, desconto=-5)
+
 
 if __name__ == "__main__":
     unittest.main()
